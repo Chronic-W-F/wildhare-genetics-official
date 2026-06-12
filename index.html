@@ -214,53 +214,29 @@ section{
   align-items:center;
 }
 
-.about-brand{
+.about-image{
   min-height:520px;
   border:1px solid rgba(212,175,55,.36);
   background:
-    radial-gradient(circle at center, rgba(212,175,55,.18), transparent 45%),
+    radial-gradient(circle at center, rgba(212,175,55,.14), transparent 50%),
     linear-gradient(180deg, #111, #030303);
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
-  padding:32px;
+  overflow:hidden;
+  padding:22px;
   box-shadow:
     0 0 28px rgba(212,175,55,.16),
     inset 0 0 45px rgba(212,175,55,.06);
 }
 
-.about-brand-inner{
-  border:1px solid rgba(212,175,55,.25);
+.about-image img{
   width:100%;
-  min-height:420px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  padding:30px;
-  box-shadow:inset 0 0 35px rgba(0,0,0,.75);
-}
-
-.about-brand h3{
-  font-family:'Cinzel',serif;
-  color:var(--gold);
-  font-size:clamp(2rem, 6vw, 4.2rem);
-  line-height:1.05;
-  letter-spacing:3px;
-  text-shadow:
-    0 0 8px rgba(212,175,55,.75),
-    0 0 30px rgba(212,175,55,.35);
-}
-
-.about-brand span{
+  height:100%;
+  max-height:520px;
+  object-fit:contain;
   display:block;
-  margin-top:20px;
-  font-family:'Cinzel',serif;
-  color:var(--muted);
-  letter-spacing:4px;
-  text-transform:uppercase;
-  font-size:.82rem;
+  filter:drop-shadow(0 0 18px rgba(212,175,55,.25));
 }
 
 .about-text{
@@ -515,12 +491,12 @@ footer{
     grid-template-columns:1fr;
   }
 
-  .about-brand{
+  .about-image{
     min-height:360px;
   }
 
-  .about-brand-inner{
-    min-height:280px;
+  .about-image img{
+    max-height:360px;
   }
 
   section{
@@ -543,22 +519,19 @@ footer{
   <a href="#contact">Contact</a>
 </nav><section class="hero" id="home">
   <div class="hero-content">
-    <div class="hero-kicker">Welcome To The Vault</div>
+    <div class="hero-kicker">Wild Hare Genetics</div>
     <h1>Wild Hare Genetics</h1>
     <p>
       Elite genetics built through intentional selection, disciplined breeding,
       and a commitment to quality over quantity.
     </p>
-    <a href="#about" class="btn">Enter The Vault</a>
+    <a href="#about" class="btn">Enter</a>
   </div>
 </section><section id="about">
-  <h2 class="section-title">About Wild Hare</h2>
+  <h2 class="section-title">About Wild Hare Genetics</h2>
   <div class="section-line"></div>  <div class="about-wrap">
-    <div class="about-brand">
-      <div class="about-brand-inner">
-        <h3>The Wild Hare Vault</h3>
-        <span>Bred To Impress. Built To Elevate.</span>
-      </div>
+    <div class="about-image">
+      <img src="images/wildhare-genetics.png" alt="Wild Hare Genetics">
     </div><div class="about-text">
   <p>
     In a market flooded with noise, shortcuts, and recycled work,
@@ -572,12 +545,12 @@ footer{
   </p>
 
   <p>
-    Welcome to <strong>The Wild Hare Vault</strong>.
+    Welcome to <strong>Wild Hare Genetics</strong>.
   </p>
 
   <p>
-    The Vault represents a commitment to elite selection, preservation,
-    and elevation of genetics. Every line that enters is chosen with
+    Wild Hare Genetics represents a commitment to elite selection,
+    preservation, and elevation of genetics. Every line is chosen with
     purpose. Every phenotype is hunted with precision. Every release is
     earned, never forced.
   </p>
@@ -590,7 +563,7 @@ footer{
 
     <div class="philosophy-item">
       <h4>Patience Is Power</h4>
-      <p>True work takes time, and the Vault operates on its own clock — not the industry's.</p>
+      <p>True work takes time. Quality genetics operate on their own clock — not the industry's.</p>
     </div>
 
     <div class="philosophy-item">
@@ -614,7 +587,7 @@ footer{
 </section><section id="vault">
   <h2 class="section-title">The Seed Vault</h2>
   <div class="section-line"></div>  <div class="vault-card">
-    <h3>Enter The Wild Hare Seed Vault</h3>
+    <h3>Enter The Seed Vault</h3>
     <p>
       Browse the active Wild Hare Genetics seed catalog in the official Seed Vault.
       The vault opens in a new window for the full-screen experience.
