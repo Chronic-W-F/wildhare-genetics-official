@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Frostbite Fritter",
+    "type": "Hybrid",
+    "lineage": "Apple Fritter x Frostbite Royale F1 #23",
+    "image": "images/frostbite-fritter.png"
+  },
+  {
+    "name": "Gotham Cookie Caviar",
+    "type": "Hybrid",
+    "lineage": "Blackberry Caviar x Neon Wookie Cookie (Reversal)",
+    "image": "images/gotham-cookie-caviar.png"
+  },
+  {
+    "name": "MotorMelt",
+    "type": "Hybrid",
+    "lineage": "Fine Motor Zkittles x Neon Wookie Cookie (Reversal)",
+    "image": "images/motormelt.png"
+  },
+  {
+    "name": "Frostbite Royale F1",
+    "type": "F1 Hybrid",
+    "lineage": "Wild Hare Genetics",
+    "image": "images/frostbite-royale-f1.png"
+  }
+]
