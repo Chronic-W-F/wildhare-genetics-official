@@ -314,22 +314,36 @@ section{
   font-size:1.1rem;
 }
 
-.vault-embed{
-  max-width:1150px;
-  margin:20px auto 0;
-  border:1px solid rgba(212,175,55,.35);
-  background:#070707;
-  padding:18px;
+.vault-card{
+  max-width:900px;
+  margin:0 auto;
+  text-align:center;
+  padding:52px 28px;
+  background:
+    radial-gradient(circle at center, rgba(212,175,55,.12), transparent 55%),
+    linear-gradient(180deg, #101010, #050505);
+  border:1px solid rgba(212,175,55,.38);
   box-shadow:
-    0 0 25px rgba(212,175,55,.16),
-    inset 0 0 30px rgba(212,175,55,.04);
+    0 0 22px rgba(212,175,55,.16),
+    inset 0 0 35px rgba(212,175,55,.05);
 }
 
-.vault-embed iframe{
-  width:100%;
-  min-height:750px;
-  border:0;
-  background:#000;
+.vault-card h3{
+  font-family:'Cinzel',serif;
+  color:var(--gold);
+  font-size:clamp(1.7rem, 4vw, 2.7rem);
+  letter-spacing:2px;
+  margin-bottom:20px;
+  text-shadow:
+    0 0 8px rgba(212,175,55,.58),
+    0 0 28px rgba(212,175,55,.28);
+}
+
+.vault-card p{
+  max-width:680px;
+  margin:0 auto 32px;
+  color:var(--muted);
+  font-size:1.35rem;
 }
 
 .contact{
@@ -389,7 +403,7 @@ footer{
   <a href="#home">Home</a>
   <a href="#about">About The Vault</a>
   <a href="#genetics">Genetics</a>
-  <a href="#vault">Seed Vault</a>
+  <a href="https://pwa-seedbank.emergent.host/v/22f5aa776e614b3b" target="_blank" rel="noopener noreferrer">Seed Vault</a>
   <a href="#contact">Contact</a>
 </nav><section class="hero" id="home">
   <div class="hero-content">
@@ -474,14 +488,20 @@ footer{
 
   </div>
 </section><section id="vault">
-  <h2 class="section-title">Seed Vault</h2>
-  <div class="section-line"></div>  <p class="genetics-intro">
-    Browse the active Wild Hare seed vault below.
-  </p>  <div class="vault-embed">
-    <iframe
-      src="https://pwa-seedbank.emergent.host/v/22f5aa776e614b3b"
-      title="Wild Hare Genetics Seed Vault">
-    </iframe>
+  <h2 class="section-title">The Seed Vault</h2>
+  <div class="section-line"></div>  <div class="vault-card">
+    <h3>Enter The Wild Hare Seed Vault</h3>
+    <p>
+      Browse the active Wild Hare Genetics seed catalog in the official Seed Vault.
+      The vault opens in a new window for the full-screen experience.
+    </p><a
+  class="btn"
+  href="https://pwa-seedbank.emergent.host/v/22f5aa776e614b3b"
+  target="_blank"
+  rel="noopener noreferrer">
+  Enter Seed Vault
+</a>
+
   </div>
 </section><section id="contact">
   <h2 class="section-title">Contact</h2>
