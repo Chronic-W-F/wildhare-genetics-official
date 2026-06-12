@@ -37,9 +37,9 @@ body::before{
   inset:0;
   pointer-events:none;
   background:
-    radial-gradient(circle at 50% 0%, rgba(212,175,55,.12), transparent 35%),
-    radial-gradient(circle at 20% 30%, rgba(212,175,55,.06), transparent 25%),
-    radial-gradient(circle at 80% 65%, rgba(212,175,55,.05), transparent 30%);
+    radial-gradient(circle at 50% 0%, rgba(212,175,55,.15), transparent 35%),
+    radial-gradient(circle at 20% 30%, rgba(212,175,55,.07), transparent 25%),
+    radial-gradient(circle at 80% 65%, rgba(212,175,55,.06), transparent 30%);
   z-index:-2;
 }
 
@@ -66,7 +66,7 @@ nav{
   justify-content:center;
   gap:34px;
   padding:18px 24px;
-  background:rgba(0,0,0,.82);
+  background:rgba(0,0,0,.86);
   backdrop-filter:blur(12px);
   border-bottom:1px solid rgba(212,175,55,.35);
   box-shadow:0 0 25px rgba(212,175,55,.12);
@@ -99,7 +99,7 @@ nav a:hover{
   padding:120px 22px 80px;
   position:relative;
   background:
-    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.92)),
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.94)),
     url("https://images.unsplash.com/photo-1514371879740-2e7d2068f502?auto=format&fit=crop&w=1800&q=80");
   background-size:cover;
   background-position:center;
@@ -119,7 +119,7 @@ nav a:hover{
   max-width:980px;
   padding:50px 24px;
   border:1px solid rgba(212,175,55,.38);
-  background:rgba(0,0,0,.45);
+  background:rgba(0,0,0,.48);
   box-shadow:
     0 0 25px rgba(212,175,55,.18),
     inset 0 0 30px rgba(212,175,55,.06);
@@ -169,6 +169,7 @@ nav a:hover{
     0 0 12px rgba(212,175,55,.35),
     inset 0 0 10px rgba(212,175,55,.08);
   transition:.25s ease;
+  cursor:pointer;
 }
 
 .btn:hover{
@@ -205,25 +206,61 @@ section{
 }
 
 .about-wrap{
-  max-width:1100px;
+  max-width:1150px;
   margin:auto;
   display:grid;
-  grid-template-columns:1fr 1.15fr;
+  grid-template-columns:1fr 1.1fr;
   gap:38px;
   align-items:center;
 }
 
-.about-image{
+.about-brand{
   min-height:520px;
-  border:1px solid rgba(212,175,55,.35);
+  border:1px solid rgba(212,175,55,.36);
   background:
-    linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.7)),
-    url("https://images.unsplash.com/photo-1510846606678-710e3b2f6193?auto=format&fit=crop&w=1200&q=80");
-  background-size:cover;
-  background-position:center;
+    radial-gradient(circle at center, rgba(212,175,55,.18), transparent 45%),
+    linear-gradient(180deg, #111, #030303);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:32px;
   box-shadow:
-    0 0 22px rgba(212,175,55,.14),
-    inset 0 0 35px rgba(0,0,0,.8);
+    0 0 28px rgba(212,175,55,.16),
+    inset 0 0 45px rgba(212,175,55,.06);
+}
+
+.about-brand-inner{
+  border:1px solid rgba(212,175,55,.25);
+  width:100%;
+  min-height:420px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:30px;
+  box-shadow:inset 0 0 35px rgba(0,0,0,.75);
+}
+
+.about-brand h3{
+  font-family:'Cinzel',serif;
+  color:var(--gold);
+  font-size:clamp(2rem, 6vw, 4.2rem);
+  line-height:1.05;
+  letter-spacing:3px;
+  text-shadow:
+    0 0 8px rgba(212,175,55,.75),
+    0 0 30px rgba(212,175,55,.35);
+}
+
+.about-brand span{
+  display:block;
+  margin-top:20px;
+  font-family:'Cinzel',serif;
+  color:var(--muted);
+  letter-spacing:4px;
+  text-transform:uppercase;
+  font-size:.82rem;
 }
 
 .about-text{
@@ -243,6 +280,24 @@ section{
 
 .about-text strong{
   color:var(--gold-light);
+}
+
+.philosophy{
+  margin-top:28px;
+  display:grid;
+  gap:18px;
+}
+
+.philosophy-item{
+  border-top:1px solid rgba(212,175,55,.25);
+  padding-top:18px;
+}
+
+.philosophy-item h4{
+  font-family:'Cinzel',serif;
+  color:var(--gold);
+  letter-spacing:1.3px;
+  margin-bottom:6px;
 }
 
 .genetics-intro{
@@ -267,6 +322,7 @@ section{
     0 0 15px rgba(212,175,55,.11),
     inset 0 0 22px rgba(212,175,55,.04);
   transition:.28s ease;
+  cursor:pointer;
 }
 
 .card:hover{
@@ -278,10 +334,7 @@ section{
 }
 
 .card-image{
-  height:260px;
-  background:
-    linear-gradient(rgba(0,0,0,.08), rgba(0,0,0,.55)),
-    url("https://images.unsplash.com/photo-1603909223429-69bb7101f420?auto=format&fit=crop&w=1200&q=80");
+  height:340px;
   background-size:cover;
   background-position:center;
   border-bottom:1px solid rgba(212,175,55,.3);
@@ -361,6 +414,81 @@ section{
   font-size:1.35rem;
 }
 
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  z-index:5000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:22px;
+}
+
+.lightbox.active{
+  display:flex;
+}
+
+.lightbox-card{
+  max-width:920px;
+  width:100%;
+  background:#060606;
+  border:1px solid rgba(212,175,55,.45);
+  box-shadow:
+    0 0 30px rgba(212,175,55,.25),
+    inset 0 0 30px rgba(212,175,55,.05);
+  position:relative;
+  overflow:hidden;
+}
+
+.lightbox-close{
+  position:absolute;
+  top:14px;
+  right:14px;
+  width:42px;
+  height:42px;
+  border:1px solid rgba(212,175,55,.6);
+  background:rgba(0,0,0,.75);
+  color:var(--gold-light);
+  font-size:1.6rem;
+  cursor:pointer;
+  z-index:2;
+}
+
+.lightbox img{
+  width:100%;
+  display:block;
+  max-height:72vh;
+  object-fit:contain;
+  background:#000;
+}
+
+.lightbox-content{
+  padding:24px;
+}
+
+.lightbox-content h3{
+  font-family:'Cinzel',serif;
+  color:var(--gold);
+  font-size:1.8rem;
+  letter-spacing:1px;
+  margin-bottom:8px;
+}
+
+.lightbox-content .tag{
+  color:var(--muted);
+  font-family:'Cinzel',serif;
+  font-size:.78rem;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+
+.lightbox-content p{
+  color:var(--ivory);
+  font-size:1.15rem;
+}
+
 footer{
   text-align:center;
   padding:42px 20px;
@@ -387,8 +515,12 @@ footer{
     grid-template-columns:1fr;
   }
 
-  .about-image{
+  .about-brand{
     min-height:360px;
+  }
+
+  .about-brand-inner{
+    min-height:280px;
   }
 
   section{
@@ -398,10 +530,14 @@ footer{
   .hero-content{
     padding:38px 18px;
   }
+
+  .card-image{
+    height:310px;
+  }
 }
 </style></head><body><nav>
   <a href="#home">Home</a>
-  <a href="#about">About The Vault</a>
+  <a href="#about">About Wild Hare</a>
   <a href="#genetics">Genetics</a>
   <a href="https://pwa-seedbank.emergent.host/v/22f5aa776e614b3b" target="_blank" rel="noopener noreferrer">Seed Vault</a>
   <a href="#contact">Contact</a>
@@ -416,9 +552,14 @@ footer{
     <a href="#about" class="btn">Enter The Vault</a>
   </div>
 </section><section id="about">
-  <h2 class="section-title">About The Vault</h2>
+  <h2 class="section-title">About Wild Hare</h2>
   <div class="section-line"></div>  <div class="about-wrap">
-    <div class="about-image"></div><div class="about-text">
+    <div class="about-brand">
+      <div class="about-brand-inner">
+        <h3>The Wild Hare Vault</h3>
+        <span>Bred To Impress. Built To Elevate.</span>
+      </div>
+    </div><div class="about-text">
   <p>
     In a market flooded with noise, shortcuts, and recycled work,
     true genetics stand apart.
@@ -441,6 +582,23 @@ footer{
     earned, never forced.
   </p>
 
+  <div class="philosophy">
+    <div class="philosophy-item">
+      <h4>Selection Over Volume</h4>
+      <p>We don't flood the market. We refine it. Only the strongest expressions move forward.</p>
+    </div>
+
+    <div class="philosophy-item">
+      <h4>Patience Is Power</h4>
+      <p>True work takes time, and the Vault operates on its own clock — not the industry's.</p>
+    </div>
+
+    <div class="philosophy-item">
+      <h4>Legacy Over Trends</h4>
+      <p>The goal isn't attention. It's impact.</p>
+    </div>
+  </div>
+
   <p>
     <strong>Wild Hare Genetics</strong><br>
     Bred to Impress. Built to Elevate.
@@ -451,42 +609,8 @@ footer{
 </section><section id="genetics">
   <h2 class="section-title">Genetics</h2>
   <div class="section-line"></div>  <p class="genetics-intro">
-    A curated collection of selected genetics presented with a premium
-    lighthouse-style gallery experience.
-  </p>  <div class="genetics-grid">
-    <div class="card">
-      <div class="card-image"></div>
-      <div class="card-content">
-        <h3>Coming Soon</h3>
-        <div class="tag">Wild Hare Genetics</div>
-        <p>
-          Featured genetics will appear here with image galleries, lineage,
-          notes, and availability.
-        </p>
-      </div>
-    </div><div class="card">
-  <div class="card-image"></div>
-  <div class="card-content">
-    <h3>Coming Soon</h3>
-    <div class="tag">Lighthouse Gallery</div>
-    <p>
-      Each card will open a full-screen gallery as more images are added.
-    </p>
-  </div>
-</div>
-
-<div class="card">
-  <div class="card-image"></div>
-  <div class="card-content">
-    <h3>Coming Soon</h3>
-    <div class="tag">Elite Selection</div>
-    <p>
-      Built for growers, breeders, and collectors who value quality over hype.
-    </p>
-  </div>
-</div>
-
-  </div>
+    Explore the current Wild Hare Genetics collection.
+  </p>  <div class="genetics-grid" id="geneticsGrid"></div>
 </section><section id="vault">
   <h2 class="section-title">The Seed Vault</h2>
   <div class="section-line"></div>  <div class="vault-card">
@@ -508,7 +632,17 @@ footer{
   <div class="section-line"></div>  <div class="contact">
     <p>Email, Instagram, and breeder inquiry links coming soon.</p>
   </div>
-</section><footer>
+</section><div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-card" onclick="event.stopPropagation()">
+    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+    <img id="lightboxImage" src="" alt="">
+    <div class="lightbox-content">
+      <h3 id="lightboxTitle"></h3>
+      <div class="tag" id="lightboxType"></div>
+      <p id="lightboxLineage"></p>
+    </div>
+  </div>
+</div><footer>
   Wild Hare Genetics © 2026 — Bred to Impress. Built to Elevate.
-</footer></body>
+</footer><script src="js/genetics.js"></script></body>
 </html>
