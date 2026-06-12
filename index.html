@@ -68,62 +68,33 @@ nav a:hover{color:var(--gold-light);}
   display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
-  padding:120px 22px 80px;
+  padding:112px 18px 55px;
   position:relative;
   background:
-    linear-gradient(rgba(0,0,0,.62), rgba(0,0,0,.94)),
-    url("https://images.unsplash.com/photo-1514371879740-2e7d2068f502?auto=format&fit=crop&w=1800&q=80");
-  background-size:cover;
-  background-position:center;
-}
-
-.hero::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    radial-gradient(circle at center, rgba(212,175,55,.14), transparent 32%),
-    linear-gradient(90deg, rgba(0,0,0,.95), transparent 40%, rgba(0,0,0,.95));
+    radial-gradient(circle at center, rgba(212,175,55,.10), transparent 35%),
+    linear-gradient(180deg, #050505, #020202);
 }
 
 .hero-content{
   position:relative;
-  max-width:980px;
-  padding:50px 24px;
+  width:100%;
+  max-width:1400px;
+}
+
+.hero-banner{
+  padding:0;
+  border:none;
+  background:none;
+  box-shadow:none;
+}
+
+.hero-banner img{
+  width:100%;
+  display:block;
   border:1px solid rgba(212,175,55,.38);
-  background:rgba(0,0,0,.5);
   box-shadow:
     0 0 25px rgba(212,175,55,.18),
-    inset 0 0 30px rgba(212,175,55,.06);
-}
-
-.hero-kicker{
-  font-family:'Cinzel',serif;
-  color:var(--muted);
-  letter-spacing:4px;
-  text-transform:uppercase;
-  font-size:.82rem;
-  margin-bottom:18px;
-}
-
-.hero h1{
-  font-family:'Cinzel',serif;
-  font-size:clamp(2.7rem, 7vw, 6rem);
-  line-height:1.05;
-  letter-spacing:4px;
-  color:var(--gold);
-  margin-bottom:24px;
-  text-shadow:
-    0 0 5px rgba(212,175,55,.85),
-    0 0 18px rgba(212,175,55,.55),
-    0 0 42px rgba(212,175,55,.35);
-}
-
-.hero p{
-  max-width:760px;
-  margin:0 auto 38px;
-  font-size:clamp(1.2rem, 2.4vw, 1.65rem);
+    0 0 70px rgba(212,175,55,.10);
 }
 
 .btn{
@@ -456,6 +427,11 @@ footer{
 
   nav a{font-size:.68rem;}
 
+  .hero{
+    min-height:auto;
+    padding:105px 10px 35px;
+  }
+
   .about-wrap{grid-template-columns:1fr;}
 
   .about-image{min-height:360px;}
@@ -463,8 +439,6 @@ footer{
   .about-image img{max-height:360px;}
 
   section{padding:78px 6%;}
-
-  .hero-content{padding:38px 18px;}
 
   .card-image{height:310px;}
 }
@@ -475,14 +449,8 @@ footer{
   <a href="#vault">Seed Vault</a>
   <a href="#contact">Contact</a>
 </nav><section class="hero" id="home">
-  <div class="hero-content">
-    <div class="hero-kicker">Wild Hare Genetics</div>
-    <h1>Wild Hare Genetics</h1>
-    <p>
-      Elite genetics built through intentional selection, disciplined breeding,
-      and a commitment to quality over quantity.
-    </p>
-    <a href="#genetics" class="btn">View Genetics</a>
+  <div class="hero-content hero-banner">
+    <img src="images/wildhare-genetics-banner.png" alt="Wild Hare Genetics Banner">
   </div>
 </section><section id="about">
   <h2 class="section-title">About Wild Hare Genetics</h2>
