@@ -870,7 +870,7 @@ function addToCart(item, pack) {
 
   saveCart();
   renderCart();
-
+}
 function removeFromCart(id) {
   cart = cart.filter(item => item.id !== id);
   saveCart();
