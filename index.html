@@ -73,14 +73,12 @@ nav a:hover{color:var(--gold-light);}
   align-items:center;
   justify-content:center;
   padding:112px 18px 55px;
-  position:relative;
   background:
     radial-gradient(circle at center, rgba(212,175,55,.10), transparent 35%),
     linear-gradient(180deg, #050505, #020202);
 }
 
 .hero-content{
-  position:relative;
   width:100%;
   max-width:1400px;
 }
@@ -122,7 +120,6 @@ nav a:hover{color:var(--gold-light);}
 
 section{
   padding:95px 9%;
-  position:relative;
 }
 
 .section-title{
@@ -326,6 +323,7 @@ section{
   text-transform:uppercase;
   font-size:.7rem;
   background:rgba(0,0,0,.55);
+  cursor:pointer;
 }
 
 .order-btn:hover{
@@ -348,6 +346,105 @@ section{
 
 .payment-note strong{
   color:var(--gold-light);
+}
+
+.cart-card{
+  max-width:950px;
+  margin:55px auto 0;
+  border:1px solid rgba(212,175,55,.42);
+  background:
+    radial-gradient(circle at center, rgba(212,175,55,.10), transparent 55%),
+    linear-gradient(180deg, #101010, #050505);
+  padding:34px;
+  box-shadow:
+    0 0 22px rgba(212,175,55,.16),
+    inset 0 0 35px rgba(212,175,55,.05);
+}
+
+.cart-card h3{
+  font-family:'Cinzel',serif;
+  color:var(--gold);
+  text-align:center;
+  font-size:2rem;
+  letter-spacing:2px;
+  margin-bottom:16px;
+  text-shadow:0 0 14px rgba(212,175,55,.38);
+}
+
+.cart-empty{
+  text-align:center;
+  color:var(--muted);
+  font-size:1.2rem;
+}
+
+.cart-items{
+  display:grid;
+  gap:14px;
+  margin-top:20px;
+}
+
+.cart-item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:14px;
+  align-items:center;
+  border:1px solid rgba(212,175,55,.24);
+  background:rgba(0,0,0,.35);
+  padding:16px;
+}
+
+.cart-item strong{
+  display:block;
+  color:var(--gold-light);
+  font-family:'Cinzel',serif;
+  letter-spacing:1px;
+}
+
+.cart-item span{
+  color:var(--muted);
+}
+
+.remove-btn{
+  border:1px solid rgba(212,175,55,.5);
+  background:rgba(0,0,0,.55);
+  color:var(--gold);
+  padding:8px 12px;
+  cursor:pointer;
+  font-family:'Cinzel',serif;
+  text-transform:uppercase;
+  font-size:.65rem;
+  letter-spacing:1px;
+}
+
+.remove-btn:hover{
+  background:var(--gold);
+  color:#000;
+}
+
+.cart-total{
+  margin-top:20px;
+  padding-top:18px;
+  border-top:1px solid rgba(212,175,55,.25);
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:var(--gold-light);
+  font-family:'Cinzel',serif;
+  letter-spacing:1px;
+  font-size:1.05rem;
+}
+
+.cart-actions{
+  margin-top:24px;
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.cart-actions .btn{
+  min-width:210px;
+  text-align:center;
 }
 
 .vault-card{
@@ -520,6 +617,17 @@ footer{
 
   .card-image{height:310px;}
 
+  .cart-card{padding:24px 18px;}
+
+  .cart-item{
+    grid-template-columns:1fr;
+  }
+
+  .cart-total{
+    flex-direction:column;
+    text-align:center;
+  }
+
   .instagram-buttons{
     flex-direction:column;
     align-items:center;
@@ -539,6 +647,7 @@ footer{
   <a href="#home">Home</a>
   <a href="#about">About Wild Hare</a>
   <a href="#genetics">Genetics</a>
+  <a href="#cart">Cart</a>
   <a href="#vault">Seed Vault</a>
   <a href="#contact">Instagram</a>
 </nav>
@@ -611,16 +720,21 @@ footer{
   <div class="section-line"></div>
 
   <p class="genetics-intro">
-    Explore the current Wild Hare Genetics collection. Pack sizes and pricing are being finalized.
+    Explore the current Wild Hare Genetics collection. Pack sizes and pricing are active placeholders while final release details are being confirmed.
   </p>
 
   <div class="genetics-grid" id="geneticsGrid"></div>
 
   <div class="payment-note">
     <p>
-      <strong>Temporary ordering:</strong> CashApp and PayPal are accepted after order confirmation.
-      Order requests are sent to <strong>wildharestrainbank@gmail.com</strong>.
+      <strong>Temporary ordering:</strong> Add packs to your cart, then submit your order request.
+      CashApp and PayPal are accepted after order confirmation.
     </p>
+  </div>
+
+  <div class="cart-card" id="cart">
+    <h3>Vault Cart</h3>
+    <div id="cartContent"></div>
   </div>
 </section>
 
@@ -703,21 +817,91 @@ const STORE_CONFIG = {
   paypalEmail: "benrmorgan1985@gmail.com"
 };
 
-function buildOrderLink(item, pack) {
+const DEFAULT_PACKS = [
+  { size: "6 Seeds", price: "$50" },
+  { size: "10 Seeds", price: "$100" },
+  { size: "15 Seeds", price: "$100" }
+];
+
+let cart = JSON.parse(localStorage.getItem("wildHareCart")) || [];
+
+function saveCart() {
+  localStorage.setItem("wildHareCart", JSON.stringify(cart));
+}
+
+function getPacks(item) {
+  if (item.packs && Array.isArray(item.packs) && item.packs.length > 0) {
+    return item.packs;
+  }
+
+  return DEFAULT_PACKS;
+}
+
+function normalizePrice(price) {
+  if (!price) return 0;
+  const numeric = String(price).replace(/[^0-9.]/g, "");
+  return Number(numeric) || 0;
+}
+
+function cartTotal() {
+  return cart.reduce((sum, item) => sum + normalizePrice(item.price), 0);
+}
+
+function addToCart(item, pack) {
+  cart.push({
+    id: Date.now() + "-" + Math.random().toString(16).slice(2),
+    name: item.name,
+    type: item.type || "Wild Hare Genetics",
+    lineage: item.lineage || "Lineage coming soon.",
+    size: pack.size || "Pack size TBD",
+    price: pack.price || "Price TBD"
+  });
+
+  saveCart();
+  renderCart();
+
+  const cartSection = document.getElementById("cart");
+  cartSection.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(item => item.id !== id);
+  saveCart();
+  renderCart();
+}
+
+function clearCart() {
+  cart = [];
+  saveCart();
+  renderCart();
+}
+
+function buildSubmitOrderLink() {
   const subject = encodeURIComponent("Wild Hare Genetics Order Request");
+
+  const orderLines = cart.map((item, index) => {
+    return `${index + 1}. ${item.name}
+   Type: ${item.type}
+   Lineage: ${item.lineage}
+   Pack: ${item.size}
+   Price: ${item.price}`;
+  }).join("\n\n");
 
   const body = encodeURIComponent(
 `Wild Hare Genetics Order Request
 
-Strain: ${item.name}
-Type: ${item.type || "N/A"}
-Lineage: ${item.lineage || "N/A"}
-Pack: ${pack.size || "TBD"}
-Price: ${pack.price || "TBD"}
+Order:
+${orderLines}
+
+Estimated Total: $${cartTotal()}
 
 Customer Name:
 Shipping State:
 Preferred Payment: CashApp or PayPal
+
+Payment Options:
+CashApp: ${STORE_CONFIG.cashApp}
+PayPal: ${STORE_CONFIG.paypalEmail}
 
 Notes:
 `
@@ -726,17 +910,43 @@ Notes:
   return `mailto:${STORE_CONFIG.orderEmail}?subject=${subject}&body=${body}`;
 }
 
-function getPacks(item) {
-  if (item.packs && Array.isArray(item.packs) && item.packs.length > 0) {
-    return item.packs;
+function renderCart() {
+  const cartContent = document.getElementById("cartContent");
+
+  if (!cart.length) {
+    cartContent.innerHTML = `
+      <p class="cart-empty">Your cart is currently empty. Add packs from the Genetics section.</p>
+    `;
+    return;
   }
 
-  return [
-    {
-      size: "Pack size TBD",
-      price: "Price TBD"
-    }
-  ];
+  const itemsHtml = cart.map(item => {
+    return `
+      <div class="cart-item">
+        <div>
+          <strong>${item.name}</strong>
+          <span>${item.size} — ${item.price}</span>
+        </div>
+        <button class="remove-btn" onclick="removeFromCart('${item.id}')">Remove</button>
+      </div>
+    `;
+  }).join("");
+
+  cartContent.innerHTML = `
+    <div class="cart-items">
+      ${itemsHtml}
+    </div>
+
+    <div class="cart-total">
+      <span>Estimated Total</span>
+      <span>$${cartTotal()}</span>
+    </div>
+
+    <div class="cart-actions">
+      <a class="btn" href="${buildSubmitOrderLink()}">Submit Order</a>
+      <button class="btn" onclick="clearCart()">Clear Cart</button>
+    </div>
+  `;
 }
 
 function renderPackRows(item) {
@@ -746,13 +956,16 @@ function renderPackRows(item) {
     const size = pack.size || "Pack size TBD";
     const price = pack.price || "Price TBD";
 
+    const safeItem = encodeURIComponent(JSON.stringify(item));
+    const safePack = encodeURIComponent(JSON.stringify(pack));
+
     return `
       <div class="pack-row">
         <strong>${size}</strong>
         <span>${price}</span>
-        <a class="order-btn" href="${buildOrderLink(item, pack)}">
-          Order This Pack
-        </a>
+        <button class="order-btn" onclick="addToCart(JSON.parse(decodeURIComponent('${safeItem}')), JSON.parse(decodeURIComponent('${safePack}')))">
+          Add to Cart
+        </button>
       </div>
     `;
   }).join("");
@@ -809,6 +1022,8 @@ fetch("data/genetics.json")
 function closeLightbox() {
   document.getElementById("lightbox").classList.remove("active");
 }
+
+renderCart();
 </script>
 
 </body>
