@@ -1,26 +1,38 @@
 [
   {
-    "name": "Frostbite Fritter",
-    "type": "Hybrid",
-    "lineage": "Apple Fritter x Frostbite Royale F1 #23",
-    "image": "images/frostbite-fritter.png"
+    "name": "Frostbite Royale BX",
+    "type": "Photo / Regular",
+    "lineage": "Frostbite Royale Backcross",
+    "description": "A refined backcross project focused on extreme frost, elite resin production, and preservation of the Frostbite Royale line.",
+    "image": "images/frostbite-royale-bx.jpg",
+    "packs": [
+      { "size": "6 Seeds", "price": "$50" },
+      { "size": "10 Seeds", "price": "$100" },
+      { "size": "15 Seeds", "price": "$100" }
+    ]
   },
   {
-    "name": "Gotham Cookie Caviar",
-    "type": "Hybrid",
-    "lineage": "Blackberry Caviar x Neon Wookie Cookie (Reversal)",
-    "image": "images/g-c-c.png"
+    "name": "Skunkbite",
+    "type": "Photo / Regular",
+    "lineage": "Skunk #1 × Frostbite Royale F1 #23",
+    "description": "Old-school skunk funk meets modern frost. Heavy aroma, loud terpene profile, and aggressive vigor.",
+    "image": "images/skunkbite.jpg",
+    "packs": [
+      { "size": "6 Seeds", "price": "$50" },
+      { "size": "10 Seeds", "price": "$100" },
+      { "size": "15 Seeds", "price": "$100" }
+    ]
   },
   {
-    "name": "MotorMelt",
-    "type": "Hybrid",
-    "lineage": "Fine Motor Zkittles x Neon Wookie Cookie (Reversal)",
-    "image": "images/motormelt.png"
-  },
-  {
-    "name": "Frostbite Royale F1",
-    "type": "F1 Hybrid",
-    "lineage": "Wild Hare Genetics",
-    "image": "images/frostbite-royale-f1.png"
+    "name": "Royal Octane",
+    "type": "Photo / Regular",
+    "lineage": "Motormelt × Frostbite Royale F1 #23",
+    "description": "Fuel-forward terpenes, elite frost coverage, and heavy resin production wrapped in a high-octane performance package.",
+    "image": "images/royal-octane.jpg",
+    "packs": [
+      { "size": "6 Seeds", "price": "$50" },
+      { "size": "10 Seeds", "price": "$100" },
+      { "size": "15 Seeds", "price": "$100" }
+    ]
   }
 ]
