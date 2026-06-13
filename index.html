@@ -871,10 +871,6 @@ function addToCart(item, pack) {
   saveCart();
   renderCart();
 
-  const cartSection = document.getElementById("cart");
-  cartSection.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
 function removeFromCart(id) {
   cart = cart.filter(item => item.id !== id);
   saveCart();
