@@ -422,8 +422,8 @@ section{
 }
 
 .cart-total{
-  margin-top:20px;
-  padding-top:18px;
+  margin-top:14px;
+  padding-top:14px;
   border-top:1px solid rgba(212,175,55,.25);
   display:flex;
   justify-content:space-between;
@@ -727,8 +727,8 @@ footer{
 
   <div class="payment-note">
     <p>
-      <strong>Temporary ordering:</strong> Add packs to your cart, then submit your order request.
-      CashApp and PayPal are accepted after order confirmation.
+      <strong>Temporary ordering:</strong> Add packs to your cart, submit your order request, then use CashApp or PayPal from the cart.
+      Shipping is <strong>$10</strong>.
     </p>
   </div>
 
@@ -814,7 +814,9 @@ footer{
 const STORE_CONFIG = {
   orderEmail: "wildharestrainbank@gmail.com",
   cashApp: "$344BM",
-  paypalEmail: "benrmorgan1985@gmail.com"
+  cashAppLink: "https://cash.app/$344BM",
+  paypalEmail: "benrmorgan1985@gmail.com",
+  shipping: 10
 };
 
 const DEFAULT_PACKS = [
@@ -843,8 +845,17 @@ function normalizePrice(price) {
   return Number(numeric) || 0;
 }
 
-function cartTotal() {
+function cartSubtotal() {
   return cart.reduce((sum, item) => sum + normalizePrice(item.price), 0);
+}
+
+function cartGrandTotal() {
+  if (!cart.length) return 0;
+  return cartSubtotal() + STORE_CONFIG.shipping;
+}
+
+function buildPayPalLink() {
+  return `https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=${encodeURIComponent(STORE_CONFIG.paypalEmail)}&currency_code=USD&amount=${cartGrandTotal()}`;
 }
 
 function addToCart(item, pack) {
@@ -893,15 +904,12 @@ function buildSubmitOrderLink() {
 Order:
 ${orderLines}
 
-Estimated Total: $${cartTotal()}
+Subtotal: $${cartSubtotal()}
+Shipping: $${STORE_CONFIG.shipping}
+Total: $${cartGrandTotal()}
 
 Customer Name:
-Shipping State:
-Preferred Payment: CashApp or PayPal
-
-Payment Options:
-CashApp: ${STORE_CONFIG.cashApp}
-PayPal: ${STORE_CONFIG.paypalEmail}
+Address:
 
 Notes:
 `
@@ -938,12 +946,24 @@ function renderCart() {
     </div>
 
     <div class="cart-total">
-      <span>Estimated Total</span>
-      <span>$${cartTotal()}</span>
+      <span>Subtotal</span>
+      <span>$${cartSubtotal()}</span>
+    </div>
+
+    <div class="cart-total">
+      <span>Shipping</span>
+      <span>$${STORE_CONFIG.shipping}</span>
+    </div>
+
+    <div class="cart-total">
+      <span>Total</span>
+      <span>$${cartGrandTotal()}</span>
     </div>
 
     <div class="cart-actions">
       <a class="btn" href="${buildSubmitOrderLink()}">Submit Order</a>
+      <a class="btn" href="${STORE_CONFIG.cashAppLink}" target="_blank" rel="noopener noreferrer">Pay CashApp</a>
+      <a class="btn" href="${buildPayPalLink()}" target="_blank" rel="noopener noreferrer">Pay PayPal</a>
       <button class="btn" onclick="clearCart()">Clear Cart</button>
     </div>
   `;
